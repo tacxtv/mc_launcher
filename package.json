@@ -1,0 +1,57 @@
+{
+  "name": "mc_launcher",
+  "version": "0.0.12",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "types": "types/",
+  "scripts": {
+    "postinstall": "nuxt prepare",
+    "dev": "nuxi dev",
+    "build": "yarn run build:nuxt && yarn run build:electron",
+    "build:nuxt": "nuxi build --prerender",
+    "build:electron": "electron-builder"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.8",
+    "@xmcl/installer": "^5.2.0",
+    "@xmcl/task": "^4.1.0",
+    "axios": "^1.6.1",
+    "colors": "^1.4.0",
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.4",
+    "firebase": "^10.6.0",
+    "glob": "^10.3.10",
+    "jsonwebtoken": "^9.0.2",
+    "minecraft-launcher-core": "^3.17.3",
+    "nuxt-quasar-ui": "^2.0.6",
+    "nuxt-vuefire": "^0.4.1",
+    "quasar": "^2.13.1",
+    "vuefire": "^3.1.18"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "electron": "^27.0.4",
+    "electron-builder": "^24.6.4",
+    "electron-debug": "^3.2.0",
+    "electron-log": "^5.0.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "nuxt": "^3.6.3",
+    "nuxt-electron": "^0.6.0",
+    "prettier": "^3.0.3",
+    "sass": "^1.69.5",
+    "tree-kill": "^1.2.2",
+    "typescript": "^5.2.2",
+    "vite-plugin-electron": "^0.15.4",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vite-plugin-pug": "^0.3.2"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.8",
+    "undici": "^5.22.11"
+  }
+}
