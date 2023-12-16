@@ -50,6 +50,7 @@ class InstallMinecraftTask extends BaseTask<any> {
         attempts++
         return await this.runTask(attempts)
       }
+      return reject(new Error('Install timed out !'))
     })
   }
 
