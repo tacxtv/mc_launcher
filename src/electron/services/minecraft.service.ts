@@ -17,9 +17,9 @@ import { installDependenciesLoaderTask } from '../tasks/install-dependencies-loa
 import { downloadTask } from '../tasks/download.task'
 
 const store = new Store()
-const javaHome = 'C:\\Program Files\\Java\\jdk-20\\bin\\java'
+// const javaHome = 'C:\\Program Files\\Java\\jdk-20\\bin\\java'
 //TODO: check if JAVA_HOME is set
-// const javaHome = join(process.env.JAVA_HOME!, 'bin', 'java')
+const javaHome = join(process.env.JAVA_HOME!, 'bin', 'java')
 const root = join(app.getPath('appData'), '.mcsl')
 
 export class MinecraftService {
