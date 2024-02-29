@@ -32,13 +32,6 @@ export class AuthService {
           id: account.id,
           username: account.username,
           skinUrl: account.skinUrl,
-          crafatar: {
-            avatars: `https://crafatar.com/avatars/${account.id}`,
-            renders: {
-              head: `https://crafatar.com/avatars/${account.id}`,
-              body: `https://crafatar.com/avatars/${account.id}`,
-            },
-          },
         })
       })
       log.info(JSON.stringify(res))
@@ -172,8 +165,8 @@ export class AuthService {
   public static async loginUser(account: any, changeAccount = false, transparent = false) {
     let accessToken = account.token
     let refreshToken = account.refreshToken
-    console.log('accessToken', accessToken)
-    console.log('refreshToken', refreshToken)
+    // console.log('accessToken', accessToken)
+    // console.log('refreshToken', refreshToken)
     if (accessToken === undefined && refreshToken === undefined) {
       await createLoginWindow()
       destroyUpdateWindow()
@@ -185,7 +178,7 @@ export class AuthService {
       const authHandler = new AuthHandler(CLIENT_ID, REDIRECT_URL)
       authInfo = await authHandler.getAuthCodes(refreshToken, true)
       // authInfo = await authHandler.authCodeToAuthToken(refreshToken, true)
-      console.log('authInfo', authInfo)
+      // console.log('authInfo', authInfo)
       accessToken = authInfo?.mcToken.access_token
       refreshToken = authInfo?.authToken.refresh_token
       mcInfo = await authHandler.getMCInfoWithToken(accessToken)

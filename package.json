@@ -1,6 +1,6 @@
 {
   "name": "mc_launcher",
-  "version": "0.0.12",
+  "version": "0.0.16",
   "private": true,
   "main": "dist-electron/main.js",
   "types": "types/",
@@ -12,6 +12,7 @@
     "build:electron": "electron-builder"
   },
   "dependencies": {
+    "@electron/remote": "^2.1.1",
     "@quasar/extras": "^1.16.8",
     "@xmcl/installer": "^5.2.0",
     "@xmcl/task": "^4.1.0",
@@ -22,6 +23,7 @@
     "firebase": "^10.6.0",
     "glob": "^10.3.10",
     "jsonwebtoken": "^9.0.2",
+    "minecraft-java-core": "git+https://github.com/tacxtv/minecraft-java-core.git",
     "minecraft-launcher-core": "^3.17.3",
     "nuxt-quasar-ui": "^2.0.6",
     "nuxt-vuefire": "^0.4.1",
@@ -51,7 +53,7 @@
     "vite-plugin-pug": "^0.3.2"
   },
   "peerDependencies": {
-    "vue": "^3.3.8",
-    "undici": "^5.22.11"
+    "undici": "^5.22.11",
+    "vue": "^3.3.8"
   }
 }

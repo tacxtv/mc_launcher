@@ -3,7 +3,9 @@ import log from 'electron-log/main'
 import os from 'os'
 import path from 'path'
 import Store from 'electron-store'
+import * as remoteMain from '@electron/remote/main'
 
+remoteMain.initialize()
 const store = new Store()
 let mainWindow: BrowserWindow | null = null
 
@@ -37,6 +39,7 @@ export async function createMainWindow(): Promise<void> {
       preload: path.join(__dirname, 'preload.js'),
     },
   })
+  remoteMain.enable(mainWindow.webContents)
   Menu.setApplicationMenu(null)
   mainWindow.setMenuBarVisibility(false)
   if (process.env.VITE_DEV_SERVER_URL) {

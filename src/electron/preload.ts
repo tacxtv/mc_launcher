@@ -29,6 +29,13 @@ declare global {
       getModpackMemory: (modpack: any) => Promise<{ min: number; max: number }>
       setModpackMemory: (modpack: any, payload: { min: number; max: number }) => void
 
+      isModpackInstalled: (modpack: any) => Promise<boolean>
+      reinstallModpack: (modpack: any) => void
+      uninstallModpack: (modpack: any) => void
+
+      getModpackJavaPath: (modpack: any) => Promise<string>
+      setModpackJavaPath: (modpack: any, val: string) => void
+
       getModpackOptionalFiles: (modpack: any) => Promise<ModpackFile[] & { enabled: boolean }[]>
       setModpackOptionalFiles: (modpack: any, files: ModpackFile[] & { enabled: boolean }[]) => void
 
@@ -43,6 +50,8 @@ declare global {
       onMinecraftProcessFinish: (func: (...args: any[]) => void) => void
 
       onWindowLogEvent: (func: (...args: any[]) => void) => void
+
+      selectFolderDialog: () => Promise<any>
     }
   }
 }
@@ -85,13 +94,13 @@ contextBridge.exposeInMainWorld('electron', {
   launchMinecraft: (modpack: Modpack) => ipcRenderer.invoke('launchMinecraft', modpack),
 
   getLastVanillaVersion: () => ipcRenderer.invoke('getLastVanillaVersion'),
-  getGameJavaPath: (id: string, jreType: string) => ipcRenderer.invoke('getGameJavaPath', id, jreType),
+  // getGameJavaPath: (id: string, jreType: string) => ipcRenderer.invoke('getGameJavaPath', id, jreType),
   getGameMem: (id: string) => ipcRenderer.invoke('getGameMem', id),
   getGameResolution: (id: string) => ipcRenderer.invoke('getGameResolution', id),
   getGameStartInFullscreen: (id: string) => ipcRenderer.invoke('getGameStartInFullscreen', id),
   getLauncherStayOpen: (id: string) => ipcRenderer.invoke('getLauncherStayOpen', id),
   setLastVanillaVersion: (version: string) => ipcRenderer.send('setLastVanillaVersion', version),
-  setGameJavaPath: (id: string, payload: string) => ipcRenderer.send('setGameJavaPath', id, payload),
+  // setGameJavaPath: (id: string, payload: string) => ipcRenderer.send('setGameJavaPath', id, payload),
   setGameMem: (id: string, min: string, max: string) => ipcRenderer.send('setGameMem', id, min, max),
   setGameResolution: (id: string, width: string, height: string) => ipcRenderer.send('setGameResolution', id, width, height),
   setGameStartInFullscreen: (id: string, payload: string) => ipcRenderer.send('setGameStartInFullscreen', id, payload),
@@ -123,6 +132,13 @@ contextBridge.exposeInMainWorld('electron', {
   getModpackMemory: (modpack: any) => ipcRenderer.invoke('getModpackMemory', modpack),
   setModpackMemory: (modpack: any, payload: any) => ipcRenderer.send('setModpackMemory', modpack, payload),
 
+  isModpackInstalled: (modpack: any) => ipcRenderer.invoke('isModpackInstalled', modpack),
+  reinstallModpack: (modpack: any) => ipcRenderer.send('reinstallModpack', modpack),
+  uninstallModpack: (modpack: any) => ipcRenderer.send('uninstallModpack', modpack),
+
+  getModpackJavaPath: (modpack: any) => ipcRenderer.invoke('getModpackJavaPath', modpack),
+  setModpackJavaPath: (modpack: any, val: any) => ipcRenderer.send('setModpackJavaPath', modpack, val),
+
   getModpackOptionalFiles: (modpack: any) => ipcRenderer.invoke('getModpackOptionalFiles', modpack),
   setModpackOptionalFiles: (modpack: any, files: any) => ipcRenderer.send('setModpackOptionalFiles', modpack, files),
 
@@ -137,6 +153,8 @@ contextBridge.exposeInMainWorld('electron', {
   onMinecraftProcessFinish: (func: (...args: any[]) => void) => ipcRenderer.on('minecraftProcessFinish', (_, ...args) => func(...args)),
 
   onWindowLogEvent: (func: (...args: any[]) => void) => ipcRenderer.on('windowLogEvent', (_, ...args) => func(...args)),
+
+  selectFolderDialog: () => ipcRenderer.invoke('selectFolderDialog'),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

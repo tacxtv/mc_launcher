@@ -21,4 +21,5 @@ export type Modpack = {
     version: string
   }[]
   files: ModpackFile[]
+  whitelist: string[]
 }

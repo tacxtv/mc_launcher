@@ -1,4 +1,5 @@
 import type { Task } from '@xmcl/task'
+import { Agent } from 'undici'
 import { BaseTask } from '@xmcl/task'
 import { getVersionList, installTask } from '@xmcl/installer'
 import log from 'electron-log/main'
@@ -25,6 +26,9 @@ class InstallMinecraftTask extends BaseTask<any> {
         const version = versionList.versions.find((v) => v.id === this.minecraft.version)
         if (!version) return
 
+        const agent = new Agent({
+          connections: 16,
+        })
         const resolved = await installTask(version, this.root, {
           side: 'client',
           librariesDownloadConcurrency: 1,

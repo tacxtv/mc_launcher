@@ -70,10 +70,12 @@ export default defineNuxtComponent({
     })
     window.electron.onMinecraftDownloadProgress((download: { id: string; value: number }) => {
       this.downloadProgress = download.value
+      console.log('onMinecraftDownloadProgress', arguments)
     })
     window.electron.onMinecraftDownloadFinish(() => {
       this.downloadProgress = 0
       this.loading = false
+      console.log('onMinecraftDownloadFinish', arguments)
     })
   },
 })

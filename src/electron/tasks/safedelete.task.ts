@@ -47,8 +47,13 @@ class SafedeleteTask extends BaseTask<any> {
         const partPathFile = join(partPath, file.name).replace(sep, '/')
         const fileNotInDownloads = !this.files.find((f) => f.path === partPathFile)
         if (fileNotInDownloads) {
-          log.info(`Delete file ${file.fullpath()}`.bgRed)
-          unlinkSync(file.fullpath())
+          try {
+            log.info(`Delete file ${file.fullpath()}`.bgRed)
+            unlinkSync(file.fullpath())
+          } catch (e) {
+            log.error(`Error deleting file ${file.fullpath()}`.bgRed)
+            log.error(e)
+          }
         }
       }
       resolve(true)
